@@ -1,3 +1,6 @@
+This is a fork of https://gitlab.com/interception/linux/plugins/caps2esc which
+does not emit Caps Lock when ESC is pressed.
+
 # caps2esc
 
 _Transforming the most useless key **ever** in the most useful one._
