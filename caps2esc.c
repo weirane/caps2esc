@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <signal.h>
 #include <unistd.h>
 #include <linux/input.h>
 
@@ -32,11 +33,24 @@ void write_event(const struct input_event *event) {
         exit(EXIT_FAILURE);
 }
 
+void emit_capslock(int num) {
+    if (num != SIGUSR1) {
+        return;
+    }
+    write(STDOUT_FILENO, &capslock_down, sizeof(struct input_event));
+    write(STDOUT_FILENO, &syn, sizeof(struct input_event));
+    write(STDOUT_FILENO, &capslock_up, sizeof(struct input_event));
+}
+
 int main(void) {
     int capslock_is_down = 0, esc_give_up = 0;
     struct input_event input;
 
-    setbuf(stdin, NULL), setbuf(stdout, NULL);
+    setbuf(stdin, NULL);
+    setbuf(stdout, NULL);
+    if (signal(SIGUSR1, emit_capslock) == SIG_ERR) {
+        perror("warning: unable to register handler for SIGUSR1");
+    }
 
     while (read_event(&input)) {
         if (input.type == EV_MSC && input.code == MSC_SCAN)

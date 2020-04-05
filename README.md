@@ -1,6 +1,11 @@
 This is a fork of https://gitlab.com/interception/linux/plugins/caps2esc which
 does not emit Caps Lock when ESC is pressed.
 
+If you _really_ need to press the Caps Lock key (e.g. Caps Lock is on for some
+reason and you want to turn it off), you can send `SIGUSR1` to `caps2esc`:
+
+    sudo killall -USR1 caps2esc
+
 The AUR package for this fork is called `interception-caps2esc-nocaps-git`.
 
 # caps2esc
