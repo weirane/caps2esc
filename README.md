@@ -1,6 +1,8 @@
 This is a fork of https://gitlab.com/interception/linux/plugins/caps2esc which
 does not emit Caps Lock when ESC is pressed.
 
+The AUR package for this fork is called `interception-caps2esc-nocaps-git`.
+
 # caps2esc
 
 _Transforming the most useless key **ever** in the most useful one._
